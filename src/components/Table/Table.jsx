@@ -1,7 +1,8 @@
 import { useState, useMemo } from 'react';
 import { useTable, useSortBy, useGlobalFilter } from 'react-table';
-import { COLUMNS, DATA } from './columns';
+import { COLUMNS, DATA } from './Data';
 import GlobalFilter from './GlobalFilter';
+import * as SC from './Table.styles';
 
 const Table = () => {
     const [users, setUsers] = useState([]);
@@ -33,19 +34,19 @@ const Table = () => {
         <>
             <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
 
-            <table {...getTableProps()}>
+            <SC.Table {...getTableProps()}>
                 <thead>
                     {headerGroups.map(headerGroup => (
-                        <tr {...headerGroup.getHeaderGroupProps()}>
+                        <SC.Tr {...headerGroup.getHeaderGroupProps()}>
                             {headerGroup.headers.map(column => (
-                                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                <SC.Th {...column.getHeaderProps(column.getSortByToggleProps())}>
                                     {column.render('Header')}
                                     <span>
                                         {column.isSorted ? (column.isSortedDesc ? '▼' : '▲') : ''}
                                     </span>
-                                </th>
+                                </SC.Th>
                             ))}
-                        </tr>
+                        </SC.Tr>
                     ))}
                 </thead>
 
@@ -53,19 +54,19 @@ const Table = () => {
                     {rows.map(row => {
                         prepareRow(row);
                         return (
-                            <tr {...row.getRowProps()}>
+                            <SC.Tr {...row.getRowProps()}>
                                 {row.cells.map(cell => {
                                     return (
-                                        <td {...cell.getCellProps()}>
+                                        <SC.Td {...cell.getCellProps()}>
                                             {cell.render('Cell')}
-                                        </td>
+                                        </SC.Td>
                                     )
                                 })}
-                            </tr>
+                            </SC.Tr>
                         )
                     })}
                 </tbody>
-            </table>
+            </SC.Table>
         </>
     );
 }
