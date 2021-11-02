@@ -1,3 +1,13 @@
+const getData = async () => {
+  const uri = 'https://reqres.in/api/users';
+  const resp = await fetch(uri);
+  const json = await resp.json();
+  const data = json.data;
+  return data;
+}
+
+export const DATA = getData();
+
 export const COLUMNS = [
   {
     Header: 'Id',

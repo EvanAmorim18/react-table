@@ -1,12 +1,14 @@
-import { useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { useTable, useSortBy, useGlobalFilter } from 'react-table';
-import Data from './Data.json';
-import { COLUMNS } from './columns';
+import { COLUMNS, DATA } from './columns';
 import GlobalFilter from './GlobalFilter';
 
 const Table = () => {
+    const [users, setUsers] = useState([]);
+    DATA.then(val => setUsers(val));
+
     const columns = useMemo(() => COLUMNS, []);
-    const data = useMemo(() => Data, []);
+    const data = useMemo(() => users, [users]);
 
     const tableInstance = useTable({
         columns,
